@@ -1,14 +1,6 @@
 language: java
 sudo: false
 services:
-- docker
-jobs:
-  include:
-    - stage: unit tests
-        script: mvn clean verify
-    - stage: creating jar
-       script: mvn package
-    - stage: build docker image
-       script: echo 1
-    - stage: build docker image
-        script: echo 2
+  - docker
+script: mvn clean verify
+
