@@ -12,3 +12,4 @@ jobs:
        script: echo 1
     - stage: build docker image
         script: echo 2
+        
