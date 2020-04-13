@@ -8,4 +8,5 @@ ADD ./scripts/docker-entrypoint.sh docker-entrypoint.sh
 
 EXPOSE 8080
 
+
 ENTRYPOINT ["sh", "/docker-entrypoint.sh"]
