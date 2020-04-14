@@ -8,7 +8,7 @@ services:
 script:
   - mvn clean verify
   - mvn clean package
-  - docker build -t $(DOCKER_IMAGE_NAME) .
+  - docker build -t $DOCKER_IMAGE_NAME .
 # only execute the following instructions in the case of a success (failing at this point
 # won't mark the build as a failure). To have `DOCKER_USERNAME` and `DOCKER_PASSWORD`
 # filled you need to either use `travis`' cli and then `travis set ..` or go to the travis
@@ -16,7 +16,7 @@ script:
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-    make push-image ;
+    docker push $(DOCKER_IMAGE_NAME) ;
     fi
 
 # don't notify me when things fail
