@@ -1,6 +1,24 @@
 language: java
-sudo: false
+# make use of vm's
+sudo: 'required'
+env:
+  - DOCKER_IMAGE_NAME=log-reg-service
 services:
   - docker
-script: mvn clean verify
+script:
+  - mvn clean verify
+  - mvn clean package
+  - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE_NAME .
+# only execute the following instructions in the case of a success (failing at this point
+# won't mark the build as a failure). To have `DOCKER_USERNAME` and `DOCKER_PASSWORD`
+# filled you need to either use `travis`' cli and then `travis set ..` or go to the travis
+# page of your repository and then change the environment in the settings pannel.
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+    docker push $DOCKER_USERNAME/$DOCKER_IMAGE_NAME ;
+    fi
 
+# don't notify me when things fail
+notifications:
+  email: false
