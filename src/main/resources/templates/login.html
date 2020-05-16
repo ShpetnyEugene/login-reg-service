@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -77,14 +77,14 @@
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-            <form>
+            <form th:object="${userForm}" th:action="@{/login}"  method="post">
                 <div class="form-group">
-                    <label>User Name</label>
-                    <input type="text" class="form-control" placeholder="User Name">
+                    <input type="text" class="form-control" name="UserName" th:field="${userForm.username}" placeholder="User name" required="required">
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" class="form-control" name="Password" th:field="${userForm.password}" placeholder="Password" required="required">
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
                 </div>
                 <button type="submit" class="btn btn-black">Login</button>
                     <a type="button" class="btn btn-secondary" href="/registration">Register</a>

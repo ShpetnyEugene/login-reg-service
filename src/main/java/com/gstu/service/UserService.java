@@ -18,6 +18,10 @@ public class UserService {
         return repository.findAll();
     }
 
+    public User getUserByUserName(String userName){
+        return repository.findByUsername(userName);
+    }
+
     public void deleteUser(Long idUser) {
         repository.deleteById(idUser);
     }

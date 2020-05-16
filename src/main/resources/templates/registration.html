@@ -88,18 +88,24 @@
         <h2>Sign Up</h2>
         <p>It's free and only takes a minute.</p>
         <hr>
+        <div th:if="${message}">
+            <h4 th:text="${message}" class="alert alert-danger" align="center"></h4>
+        </div>
         <div class="form-group">
             <input type="text" class="form-control" name="username" th:field="${userForm.username}" placeholder="Username" required="required">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></p>
         </div>
         <div class="form-group">
             <input type="email" class="form-control" name="email" th:field="${userForm.email}" placeholder="Email Address" required="required">
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password" th:field="${userForm.password}" placeholder="Password" required="required">
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" th:field="${userForm.password}" placeholder="Confirm Password"
+            <input type="password" class="form-control" name="confirm_password" th:field="${userForm.repeatPassword}" placeholder="Confirm Password"
                    required="required">
+            <p th:if="${#fields.hasErrors('repeatPassword')}" th:errors="*{repeatPassword}" class="alert alert-danger"></p>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block btn-lg">Sign Up</button>

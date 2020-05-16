@@ -5,11 +5,12 @@ import com.gstu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -27,20 +28,22 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
+    public ModelAndView addUser(@ModelAttribute("userForm") @Valid User userForm, Errors errors) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registration");
 
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        }
-        if (!userForm.getPassword().equals(userForm.getPassword())){
-            model.addAttribute("passwordError", "Password does not equals!");
-            return "registration";
-        }
-        if (!userService.saveUser(userForm)){
-            model.addAttribute("usernameError", "Username already exists!");
-            return "registration";
+        boolean isSave = userService.saveUser(userForm);
+
+        if (errors.hasErrors() || !userForm.getPassword().equals(userForm.getRepeatPassword())) {
+
+            modelAndView.addObject("message", "Please, check input fields!");
+            return modelAndView;
+        } else if (!isSave) {
+            modelAndView.addObject("message", "User with such name already exists! Please choose another.");
+        } else {
+            modelAndView.setViewName("redirect:/login");
         }
 
-        return "redirect:/";
+        return modelAndView;
     }
 }
