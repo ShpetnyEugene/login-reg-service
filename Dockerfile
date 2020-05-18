@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:jre-11.0.2.9-alpine
+FROM adoptopenjdk/openjdk11:jre-11.0.2.9-alpine11
 
 RUN apk --no-cache add curl
 RUN apk --no-cache add jq
