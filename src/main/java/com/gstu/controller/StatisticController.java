@@ -3,13 +3,16 @@ package com.gstu.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
 public class StatisticController {
 
     @GetMapping
-    public String showStatistic(){
-        return "home";
+    public ModelAndView showStatistic(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("dashboard");
+        return modelAndView;
     }
 }

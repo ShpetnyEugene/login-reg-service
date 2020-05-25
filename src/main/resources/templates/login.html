@@ -70,8 +70,8 @@
 
 <div class="sidenav">
     <div class="login-main-text">
-        <h2>Flights analytics<br> Login Page</h2>
-        <p>Login or register from here to access.</p>
+        <h2>Анализ авиасообщений<br> Авторизация</h2>
+        <p>Войдите или зарегистрируйтесь для доступа к данным.</p>
     </div>
 </div>
 <div class="main">
@@ -86,8 +86,8 @@
                     <input type="password" class="form-control" name="Password" th:field="${userForm.password}" placeholder="Password" required="required">
                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></p>
                 </div>
-                <button type="submit" class="btn btn-black">Login</button>
-                    <a type="button" class="btn btn-secondary" href="/registration">Register</a>
+                <button type="submit" class="btn btn-black">Войти</button>
+                    <a type="button" class="btn btn-secondary" href="/registration">Регистрация</a>
             </form>
         </div>
     </div>

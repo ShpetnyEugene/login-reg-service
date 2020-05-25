@@ -33,7 +33,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         User user = service.getUserByUserName(userForm.getUsername());
 
-        if (errors.hasErrors() || user == null || !user.getPassword().equals(userForm.getPassword())) {
+        if (user == null || !user.getPassword().equals(userForm.getPassword())) {
             modelAndView.setViewName("login");
         } else {
             modelAndView.setViewName("redirect:/");
